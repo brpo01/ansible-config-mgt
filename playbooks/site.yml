@@ -1,9 +1,9 @@
 ---
 - hosts: all
-  import_playbook: ../static-assignments/common.yml
+- import_playbook: ../static-assignments/common.yml
 
 - hosts: uat-servers
-  import_playbook: ../static-assignments/uat-servers.yml
+- import_playbook: ../static-assignments/uat-servers.yml
 
 - name: include env-vars file
   import_playbook: ../dynamic-assignments/env-vars.yml
