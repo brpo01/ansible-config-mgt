@@ -9,7 +9,7 @@
       - "{{ playbook_dir }}/../env-vars/default.yml"
     tags:
       - always
-      
+
 # ---
 # - name: collate variables from env specific file, if it exists
 #   hosts: all
@@ -26,3 +26,5 @@
 #             - "{{ playbook_dir }}/../env-vars"
 #       tags:
 #         - always
+
+

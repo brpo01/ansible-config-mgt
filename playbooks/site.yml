@@ -6,17 +6,15 @@
 - import_playbook: ../static-assignments/uat-servers.yml
 
 - name: include env-vars file
+  become: yes 
   import_playbook: ../dynamic-assignments/env-vars.yml
   tags:
     - always
-
-# - hosts: webservers
-# - name: Webserver assignment
-#   import_playbook: ../static-assignments/webservers.yml
 
 - name: import database file
   import_playbook: ../static-assignments/db.yml
 
 - name: Loadbalancers assignment
+  become: yes
   import_playbook: ../static-assignments/loadbalancers.yml
   when: load_balancer_is_required 
