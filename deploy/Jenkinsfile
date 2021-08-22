@@ -17,30 +17,19 @@ pipeline {
         }
       }
     }
-  }
 
-   stage('Package') {
-      steps {
-        script {
-          sh 'echo "Package App"'
-        }
-      }
-    }
-  }
-
-   stage('Deploy') {
+    stage('Deploy') {
       steps {
         script {
           sh 'echo "Deploy App"'
         }
       }
     }
-  }
 
-   stage('Clean Up') {
+    stage('Clean Up') {
       steps {
         script {
-          sh 'echo "Cleanup"'
+          sh 'echo "cleanup"'
         }
       }
     }
