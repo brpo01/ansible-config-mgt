@@ -1,6 +1,6 @@
 [uat-servers]
 172.31.41.43 ansible_ssh_user='ec2-user'
-172.31.33.138 ansible_ssh_user='ec2-user' ansible_connection=ssh ansible_ssh_pass='password'
+172.31.33.138 ansible_ssh_user='ec2-user'
 
 [nfs]
 172.31.37.58 ansible_ssh_user='ec2-user'
