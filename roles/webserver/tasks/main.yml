@@ -23,11 +23,12 @@
   become: true
   command: cp -r /var/www/html/html/ /var/www/
 
-- name: Start service httpd, if not started
+- name: Start & enable service httpd, if not started
   become: true
   ansible.builtin.service:
     name: httpd
     state: started
+    enabled: true
 
 - name: recursively remove /var/www/html/html/ directory
   become: true

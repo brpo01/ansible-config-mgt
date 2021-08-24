@@ -1,36 +1,39 @@
 pipeline {
     agent any
+    environment {
+      ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
+    }
 
   stages {
-    stage('Build') {
-      steps {
-        script {
-          sh 'echo "Building Stage"'
+    stage('Initial Cleanup') {
+      steps{
+        dir("${WORKSPACE}") {
+          deleteDir()
         }
       }
     }
 
-    stage('Test') {
-      steps {
-        script {
-          sh 'echo "Testing Stage"'
-        }
+    stage('SCM Checkout'){
+      steps{
+        git branch: 'feature/ansible-config', url: 'https://github.com/brpo01/ansible-config-mgt.git'
       }
     }
 
-    stage('Deploy') {
-      steps {
-        script {
-          sh 'echo "Deploy App"'
-        }
+    // stage('Update ansible.cfg'){
+    //   steps{
+    //     sh ('sudo sed -i -e "/roles_path = \\/[a-z]*\\/*/a\\roles_path = $cpath" -e "/roles_path = \\/[a-z]*\\/*/d" /etc/ansible/ansible.cfg')
+    //   }
+    // }
+
+    stage('Execute Ansible Playbook'){
+      steps{
+        ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev.yml', playbook: 'playbooks/site.yml'
       }
     }
 
-    stage('Clean Up') {
-      steps {
-        script {
-          sh 'echo "cleanup"'
-        }
+    stage('Clean Workspace'){
+      steps{
+        cleanWs()
       }
     }
   }
