@@ -1,11 +1,34 @@
 pipeline {
     agent any
-
-  stages {
-    stage('Build') {
-     
+    environment {
+      ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
     }
 
-    
+  stages {
+    stage('Initial Cleanup') {
+      steps{
+        dir("${WORKSPACE}") {
+          deleteDir()
+        }
+      }
+    }
+
+    stage('SCM Checkout'){
+      steps{
+        git branch: 'feature/ansible-config', url: 'https://github.com/brpo01/ansible-config-mgt.git'
+      }
+    }
+
+    stage('Execute Ansible Playbook'){
+      steps{
+        ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev.yml', playbook: 'playbooks/site.yml'
+      }
+    }
+
+    stage('Clean Workspace'){
+      steps{
+        cleanWs()
+      }
+    }
   }
 }

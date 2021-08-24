@@ -2,7 +2,7 @@
 - hosts: all
 - import_playbook: ../static-assignments/common.yml
 
-- hosts: uat-servers
+- hosts: tooling
 - import_playbook: ../static-assignments/uat-servers.yml
 
 - name: include env-vars file

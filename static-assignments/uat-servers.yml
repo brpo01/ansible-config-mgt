@@ -1,5 +1,5 @@
 ---
-- hosts: uat-servers
+- hosts: tooling
   become: yes
   roles:
     - webserver
