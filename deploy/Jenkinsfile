@@ -15,7 +15,7 @@ pipeline {
 
     stage('SCM Checkout'){
       steps{
-        git branch: 'feature/ansible-config', url: 'https://github.com/brpo01/ansible-config-mgt.git'
+       git 'https://github.com/brpo01/ansible-config-mgt.git'
       }
     }
 
